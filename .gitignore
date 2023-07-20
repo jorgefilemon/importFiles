@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+#my files 
+bpac.js
+
+src/prueba_horizontal.jsx
+
+workingCode.jsx
+
