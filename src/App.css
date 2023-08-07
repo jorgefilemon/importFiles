@@ -1,95 +1,134 @@
+* {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center; 
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
 }
 
 .read-the-docs {
-  color: #888;
+	color: #888;
+}
+
+:root {
+	--light-gray: #ececec;
+	--aquamarine: #9fd3c7;
+	--midnight-blue: #385170;
+	--navy-blue: #142d4c;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  width: 1000px;
-  margin: 0 auto;
-  border-radius: 8px;
-  align-items: center;
-  background-color: #414141;
-
-
+	display: flex;
+	flex-direction: column;
+	min-width: 1000px;
+	margin: 0 auto;
+	align-items: center;
+	background-color: #414141;
 }
 
 table {
-  border-collapse: collapse;
-
+	border-collapse: collapse;
 }
 
 tr:last-child {
-  border-bottom: 1px solid rgb(140, 140, 140);
+	border-bottom: 1px solid rgb(140, 140, 140);
 }
 
 td:first-child,
 th:first-child {
-  width: 100%;
-  border-left: 1px solid rgb(140, 140, 140);
+	width: 100%;
+	border-left: 1px solid rgb(140, 140, 140);
+	text-align: left;
+	padding-left: 140px;
 }
 
 td:nth-child(2),
 th:nth-child(2),
-td:nth-child(3n+2),
-th:nth-child(3n+2) {
-  border-right: 1px solid  rgb(140, 140, 140);
+td:nth-child(3n + 2),
+th:nth-child(3n + 2) {
+	border-right: 1px solid rgb(140, 140, 140);
 }
 
 input {
-  text-align: right;
-  padding: 2px;
-  border: none;
-  outline:none;
-}
-
-td, 
-input {
-  width: 30px;
-  height: 20px;
+	text-align: right;
+	padding: 2px;
+	border: none;
+	outline: none;
 }
 
 td {
-  border-right: 1px solid rgb(80,80,80);
+	width: 42px;
+	height: 32px;
+}
+
+input {
+	width: 30px;
+	height: 30px;
+}
+
+td {
+	border-right: 1px solid rgb(80, 80, 80);
+	padding: 0px;
 }
 
 input:focus {
-  outline: 2px solid rgb(91, 141, 233);
-  outline-offset: -1px;
+	outline: 2px solid cornflowerblue;
+	outline-offset: -1px;
 }
 
-.navbar {
-width: 100%;
-height: 80px;
-background-color: rgb(59, 59, 59);
+thead {
+	background-color: cornflowerblue;
 }
 
-thead{
-  background-color: rgb(91, 141, 233);
+th {
+	min-width: 30px;
 }
 
 .tableContainer {
-  width: 800px;
-  min-height: 400px;
-
+	min-width: 1000px;
+	min-height: 400px;
 }
 
 .tableContainer input {
-  text-align: right;
+	text-align: right;
 }
 
 tr.bottom-line {
-  border-bottom: 1px solid rgb(255, 255, 255);
+	border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+tr:focus-within,
+tr:focus-within input[type="text"] {
+	background-color: rgb(
+		96,
+		96,
+		96
+	); /* Replace "yellow" with the desired background color */
 }
 
 .selected-row {
-  background-color: cornflowerblue;
+	background-color: cornflowerblue;
 }
 
+td ::selection {
+	background-color: cornflowerblue;
+}
+
+.footerContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 80px;
+	background-color: rgb(48, 48, 48);
+}
+
+.footerContainer button {
+	padding: 20px;
+}
