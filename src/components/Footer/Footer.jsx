@@ -36,6 +36,36 @@ function Footer({ productsArray }) {
 		}
 	};
 
+	const printDisplayLabel = async (convertedData) => {
+		const precio = await IDocument.GetObject("precioLabel");
+		const marcaLabel = await IDocument.GetObject("marcaLabel");
+		const modeloLabel = await IDocument.GetObject("modeloLabel");
+
+		for (const data of convertedData) {
+			code.Text = data.clave;
+
+			const description = data.descripcion.split(" ");
+			const brand = description[0];
+			const model = description[1];
+
+			let color = description[2];
+			color = color.length > 11 ? color.substring(0, 11) : color;
+			// let size = description[description.length - 1];
+
+			precio.Text = precio;
+			marcaLabel.Text = brand;
+			precio.Text = color;
+			//sizeLabel.Text = (size * 0.1).toFixed(1);
+
+			const precio = data.precio;
+
+			IDocument.StartPrint("", 0);
+			IDocument.PrintOut(1, 0);
+			IDocument.EndPrint();
+			console.log("end of printing");
+		}
+	};
+
 	const printLabels = async () => {
 		try {
 			const newData = JSON.parse(JSON.stringify(productsArray)); // creates a deep copy of productsArray.
@@ -60,6 +90,7 @@ function Footer({ productsArray }) {
 							descripcion: `${descripcion} ${key}`,
 							existencia: value,
 							clave: `${brand}${model}${color}${key}`,
+							precio: item["PRECIO 1"],
 						});
 					}
 				});
@@ -68,10 +99,6 @@ function Footer({ productsArray }) {
 			console.log("this is converted data", convertedData);
 			const label = await IDocument.Open(
 				"C:/Users/jorge/Desktop/boxLabel.lbx"
-			);
-
-			const displayLabel = await IDocument.Open(
-				"C:/Users/jorge/Desktop/displayLabel.lbx"
 			);
 
 			console.log(label);

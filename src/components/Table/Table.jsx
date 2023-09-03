@@ -129,7 +129,7 @@ function Table({ productsArray, handleInputChange }) {
 						<tr key={index}>
 							<td>{product.descripcion}</td>
 							<td>${product.precio}</td>
-							<td>{product.categori}</td>
+							<td>{product.categoria}</td>
 							{renderProductInputs(product, index)}
 						</tr>
 					))}
