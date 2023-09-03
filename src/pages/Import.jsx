@@ -1,7 +1,12 @@
-import style from "./table.module.css";
-import { useEffect, useState } from "react";
+import "../App.css";
+import Header from "../components/Header/Header";
+import Table from "../components/Table/Table";
+import Footer from "../components/Footer/Footer";
+import { useState, useEffect } from "react";
 
-function Table({ productsArray, handleInputChange }) {
+const Home = () => {
+	const [productsArray, setProductsArray] = useState([]);
+
 	const [activeInputIndex, setActiveInputIndex] = useState(-1);
 
 	useEffect(() => {
@@ -16,9 +21,8 @@ function Table({ productsArray, handleInputChange }) {
 				event.preventDefault(); // Prevent the default behavior for arrow keys
 
 				const inputs = document.querySelectorAll(
-					`.${style.tableContainer} input[type="text"]`
+					'.tableContainer input[type="text"]'
 				);
-
 				const inputsArray = Array.from(inputs);
 				const activeElement = document.activeElement;
 
@@ -34,9 +38,8 @@ function Table({ productsArray, handleInputChange }) {
 							inputsArray.length;
 					} else if (key === "ArrowDown" || key === "ArrowUp") {
 						const rows = document.querySelectorAll(
-							`.${style.tableContainer} tbody tr`
+							".tableContainer tbody tr"
 						);
-
 						const activeRow = activeElement.closest("tr");
 						const activeRowIndex =
 							Array.from(rows).indexOf(activeRow);
@@ -73,70 +76,36 @@ function Table({ productsArray, handleInputChange }) {
 		};
 	}, []);
 
-	const generateHeaderAndInputs = () => {
-		const headerValues = [...Array(17)].map((_, i) => 20 + i * 5);
+	console.log("productsArray", productsArray);
 
-		const headerCells = headerValues.map((value, index) => (
-			<th key={index}>{value}</th>
-		));
+	// updates productsArray as values are changed in the input table.
+	const handleInputChange = (e, index, size) => {
+		const { value } = e.target;
 
-		const renderProductInputs = (product, index) => {
-			const generateInput = (size) => (
-				<td key={size}>
-					<input
-						type="text"
-						onFocus={(e) => e.target.select()}
-						defaultValue={
-							product.hasOwnProperty(size.toString())
-								? product[size] !== 0
-									? product[size]
-									: null
-								: null
-						}
-						onChange={(e) =>
-							handleInputChange(e, index, size.toString())
-						}
-					/>
-				</td>
-			);
-
-			const inputCells = headerValues.map((value) => {
-				const size = value;
-				return generateInput(size);
-			});
-
-			return inputCells;
-		};
-
-		return { headerCells, renderProductInputs };
+		setProductsArray((prevState) => {
+			const updatedProductsArray = [...prevState];
+			updatedProductsArray[index][size] = isNaN(parseInt(value))
+				? 0
+				: parseInt(value);
+			return updatedProductsArray;
+		});
 	};
+	// converts the array of objects to its original form.
 
-	const { headerCells, renderProductInputs } = generateHeaderAndInputs();
+	// Function to handle the label printing
 
 	return (
-		<div className={style.tableContainer}>
-			<table>
-				<thead>
-					<tr>
-						<th>descripcion</th>
-						<th>precio</th>
-						<th>categoria</th>
-						{headerCells}
-					</tr>
-				</thead>
-				<tbody>
-					{productsArray.map((product, index) => (
-						<tr key={index}>
-							<td>{product.descripcion}</td>
-							<td>${product.precio}</td>
-							<td>{product.categori}</td>
-							{renderProductInputs(product, index)}
-						</tr>
-					))}
-				</tbody>
-			</table>
+		<div>
+			<Header setProductsArray={setProductsArray} />
+
+			<Table
+				productsArray={productsArray}
+				handleInputChange={handleInputChange}
+			/>
+
+			<Footer productsArray={productsArray} />
 		</div>
 	);
-}
+};
 
-export default Table;
+export default Home;

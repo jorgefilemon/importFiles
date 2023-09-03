@@ -1,0 +1,81 @@
+.tableContainer {
+	min-height: 600px;
+	display: flex;
+	justify-content: center; /* Horizontally center the content */
+	align-items: flex-start; /* Vertically center the content */
+}
+
+table {
+	border-collapse: collapse;
+	min-width: 1000px;
+}
+
+.tableContainer input {
+	text-align: right;
+	max-width: 43px;
+	height: 40px;
+	padding: 2px;
+	border: 1px solid transparent;
+	outline: none;
+}
+
+input:focus {
+	border: 2px solid cornflowerblue;
+	outline: 1px solid cornflowerblue;
+}
+
+td:nth-child(3),
+th:nth-child(3),
+td:nth-child(3n + 3),
+th:nth-child(3n + 3) {
+	border-right: 1px solid rgb(145, 145, 145);
+}
+
+td {
+	border-left: 1px solid rgb(81, 81, 81);
+	border-bottom: 1px solid rgb(84, 84, 84);
+	height: 40px;
+}
+
+tr:last-child {
+	border-bottom: 1px solid rgb(105, 105, 105);
+}
+
+td:first-child,
+th:first-child {
+	border-left: 1px solid rgb(140, 140, 140);
+	text-align: center;
+	padding: 0px 6px;
+}
+
+td:nth-child(2),
+th:nth-child(2) {
+	border-left: 1px solid rgb(140, 140, 140);
+	text-align: center;
+	padding: 0px 6px;
+}
+
+thead {
+	background-color: cornflowerblue;
+}
+
+tr:focus-within {
+	background-color: rgb(88, 88, 88);
+}
+
+/* Apply styles to the <input> elements inside the focused <tr> */
+tr:focus-within input[type="text"] {
+	background-color: rgb(
+		74,
+		74,
+		74
+	); /* Replace "yellow" with the desired background color */
+}
+
+.selected-row {
+	background-color: cornflowerblue;
+}
+
+td ::selection {
+	background-color: cornflowerblue;
+}

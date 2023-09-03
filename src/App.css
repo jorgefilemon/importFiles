@@ -4,12 +4,12 @@
 	padding: 0px;
 }
 
-#root {
+/* #root {
 	max-width: 1280px;
 	margin: 0 auto;
 	padding: 2rem;
 	text-align: center;
-}
+} */
 
 .read-the-docs {
 	color: #888;
@@ -26,109 +26,8 @@
 	display: flex;
 	flex-direction: column;
 	min-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	align-items: center;
 	background-color: #414141;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-tr:last-child {
-	border-bottom: 1px solid rgb(140, 140, 140);
-}
-
-td:first-child,
-th:first-child {
-	width: 100%;
-	border-left: 1px solid rgb(140, 140, 140);
-	text-align: left;
-	padding-left: 140px;
-}
-
-td:nth-child(2),
-th:nth-child(2),
-td:nth-child(3n + 2),
-th:nth-child(3n + 2) {
-	border-right: 1px solid rgb(140, 140, 140);
-}
-
-input {
-	text-align: right;
-	padding: 2px;
-	border: none;
-	outline: none;
-}
-
-td {
-	width: 42px;
-	height: 32px;
-}
-
-input {
-	width: 30px;
-	height: 30px;
-}
-
-td {
-	border-right: 1px solid rgb(80, 80, 80);
-	padding: 0px;
-}
-
-input:focus {
-	outline: 2px solid cornflowerblue;
-	outline-offset: -1px;
-}
-
-thead {
-	background-color: cornflowerblue;
-}
-
-th {
-	min-width: 30px;
-}
-
-.tableContainer {
-	min-width: 1000px;
-	min-height: 400px;
-}
-
-.tableContainer input {
-	text-align: right;
-}
-
-tr.bottom-line {
-	border-bottom: 1px solid rgb(255, 255, 255);
-}
-
-tr:focus-within,
-tr:focus-within input[type="text"] {
-	background-color: rgb(
-		96,
-		96,
-		96
-	); /* Replace "yellow" with the desired background color */
-}
-
-.selected-row {
-	background-color: cornflowerblue;
-}
-
-td ::selection {
-	background-color: cornflowerblue;
-}
-
-.footerContainer {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 80px;
-	background-color: rgb(48, 48, 48);
-}
-
-.footerContainer button {
-	padding: 20px;
 }

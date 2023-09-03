@@ -1,4 +1,5 @@
-import { IDocument } from "../../bpac";
+import { IDocument } from "./bpac";
+import style from "./footer.module.css";
 
 function Footer({ productsArray }) {
 	const printLabelsData = async (convertedData) => {
@@ -16,13 +17,12 @@ function Footer({ productsArray }) {
 			const model = description[1];
 			let color = description[2];
 			color = color.length > 11 ? color.substring(0, 11) : color;
-			const size = description[description.length - 1];
-			console.log(size);
+			let size = description[description.length - 1];
 
 			brandLabel.Text = brand;
 			modelLabel.Text = model;
 			colorLabel.Text = color;
-			sizeLabel.Text = size;
+			sizeLabel.Text = (size * 0.1).toFixed(1);
 
 			const quantity = data.existencia;
 			if (quantity === 0) {
@@ -70,6 +70,12 @@ function Footer({ productsArray }) {
 				"C:/Users/jorge/Desktop/boxLabel.lbx"
 			);
 
+			const displayLabel = await IDocument.Open(
+				"C:/Users/jorge/Desktop/displayLabel.lbx"
+			);
+
+			console.log(label);
+
 			if (label === true) {
 				// Call the function to print the labels after setting the convertedData
 				await printLabelsData(convertedData);
@@ -84,7 +90,7 @@ function Footer({ productsArray }) {
 	};
 
 	return (
-		<footer className="footerContainer">
+		<footer className={style.footerContainer}>
 			<button onClick={printLabels}>imprimir</button>
 		</footer>
 	);
