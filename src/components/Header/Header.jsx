@@ -48,6 +48,7 @@ function Header({ setProductsArray }) {
 				const parts = item.DESCRIPCION.split(" ");
 				let clave = item.CLAVE.split("");
 				clave = clave.slice(0, -2).join("");
+
 				console.log(clave);
 
 				const description = parts.slice(0, -1).join(" ");
@@ -60,6 +61,7 @@ function Header({ setProductsArray }) {
 						descripcion: description,
 						precio: item["PRECIO 1"],
 						clave: clave,
+						categoria: item["CATEGORIA"],
 					};
 				}
 

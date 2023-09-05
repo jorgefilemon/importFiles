@@ -1,0 +1,29 @@
+[33mcommit 69cb92115b73a90fbc5958d0f6a763ab60a537ba[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: jorge davalos <jorgefilemon@gmail.com>
+Date:   Sun Sep 3 14:32:35 2023 -0600
+
+    fixed printing label
+
+[33mcommit 68d35bc36cbb83d069620c0beb6c01c7a9a10bc8[m
+Author: jorge davalos <jorgefilemon@gmail.com>
+Date:   Sun Sep 3 12:54:56 2023 -0600
+
+    based working code
+
+[33mcommit ced2ed4c4b95780d08065d37c800e43fcb140194[m
+Author: jorge davalos <jorgefilemon@gmail.com>
+Date:   Mon Aug 7 09:36:41 2023 -0600
+
+    components created
+
+[33mcommit 2ffa5eae5349a7036584d1bf4878c32749d92f2a[m
+Author: jorge davalos <jorgefilemon@gmail.com>
+Date:   Thu Jul 20 13:56:33 2023 -0600
+
+    table with working key arrows
+
+[33mcommit 65bc0cf8621974067bc545315f1d1e70d3f2fa5c[m
+Author: jorge davalos <jorgefilemon@gmail.com>
+Date:   Mon Jun 12 14:56:05 2023 -0600
+
+    first commit

@@ -18,7 +18,6 @@ function Table({ productsArray, handleInputChange }) {
 				const inputs = document.querySelectorAll(
 					`.${style.tableContainer} input[type="text"]`
 				);
-
 				const inputsArray = Array.from(inputs);
 				const activeElement = document.activeElement;
 
@@ -72,7 +71,7 @@ function Table({ productsArray, handleInputChange }) {
 			document.removeEventListener("keydown", handleArrowNavigation);
 		};
 	}, []);
-
+	// generates header and inputs
 	const generateHeaderAndInputs = () => {
 		const headerValues = [...Array(17)].map((_, i) => 20 + i * 5);
 
@@ -93,9 +92,10 @@ function Table({ productsArray, handleInputChange }) {
 									: null
 								: null
 						}
-						onChange={(e) =>
-							handleInputChange(e, index, size.toString())
-						}
+						onChange={(e) => {
+							handleInputChange(e, index, size.toString());
+							updateSumSizes(index, productsArray[index]);
+						}}
 					/>
 				</td>
 			);
@@ -111,6 +111,33 @@ function Table({ productsArray, handleInputChange }) {
 		return { headerCells, renderProductInputs };
 	};
 
+	// Create a state variable to store sums for each row
+	const [rowSums, setRowSums] = useState([]);
+
+	const calculateSumSizes = (product) => {
+		let sum = 0;
+		for (let key in product) {
+			const size = parseFloat(key);
+			if (!isNaN(size) && size >= 20 && size <= 100) {
+				sum += parseFloat(product[key]);
+			}
+		}
+		return sum;
+	};
+	// Function to calculate the sum of sizes within the range [20, 100]
+	const updateSumSizes = (index, product) => {
+		const newRowSums = [...rowSums];
+		newRowSums[index] = calculateSumSizes(product);
+		setRowSums(newRowSums);
+	};
+
+	useEffect(() => {
+		const newRowSums = productsArray.map((product) =>
+			calculateSumSizes(product)
+		);
+		setRowSums(newRowSums);
+	}, [productsArray]);
+
 	const { headerCells, renderProductInputs } = generateHeaderAndInputs();
 
 	return (
@@ -122,6 +149,8 @@ function Table({ productsArray, handleInputChange }) {
 						<th>precio</th>
 						<th>categoria</th>
 						{headerCells}
+
+						<th>total</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -131,6 +160,7 @@ function Table({ productsArray, handleInputChange }) {
 							<td>${product.precio}</td>
 							<td>{product.categoria}</td>
 							{renderProductInputs(product, index)}
+							<td>{rowSums[index]}</td>
 						</tr>
 					))}
 				</tbody>

@@ -2,6 +2,7 @@ import { IDocument } from "./bpac";
 import style from "./footer.module.css";
 
 function Footer({ productsArray }) {
+	// prints in brother printer shoe labels.
 	const printLabelsData = async (convertedData) => {
 		const code = await IDocument.GetObject("barCode");
 		const brandLabel = await IDocument.GetObject("brand");
@@ -35,45 +36,56 @@ function Footer({ productsArray }) {
 			}
 		}
 	};
+	// prints in brother printer display label.
+	const printDisplayLabel = async (newData) => {
+		try {
+			const displayLabel = await IDocument.Open(
+				"C:/Users/jorge/Desktop/displayLabel.lbx"
+			);
+			// get label labels name.
+			const precioLabel = await IDocument.GetObject("precioLabel");
+			const marcaLabel = await IDocument.GetObject("marcaLabel");
+			const modeloLabel = await IDocument.GetObject("modeloLabel");
 
-	const printDisplayLabel = async (convertedData) => {
-		const precio = await IDocument.GetObject("precioLabel");
-		const marcaLabel = await IDocument.GetObject("marcaLabel");
-		const modeloLabel = await IDocument.GetObject("modeloLabel");
+			for (const data of newData) {
+				const description = data.descripcion.split(" ");
+				const brand = description[0];
+				const model = description[1];
 
-		for (const data of convertedData) {
-			code.Text = data.clave;
+				let color = description[2];
+				color = color.length > 11 ? color.substring(0, 11) : color;
+				const precio = data.precio;
 
-			const description = data.descripcion.split(" ");
-			const brand = description[0];
-			const model = description[1];
+				precioLabel.Text = `$${precio}`;
+				marcaLabel.Text = brand.toUpperCase();
+				modeloLabel.Text = `${model} ${color}`;
 
-			let color = description[2];
-			color = color.length > 11 ? color.substring(0, 11) : color;
-			// let size = description[description.length - 1];
-
-			precio.Text = precio;
-			marcaLabel.Text = brand;
-			precio.Text = color;
-			//sizeLabel.Text = (size * 0.1).toFixed(1);
-
-			const precio = data.precio;
-
-			IDocument.StartPrint("", 0);
-			IDocument.PrintOut(1, 0);
-			IDocument.EndPrint();
-			console.log("end of printing");
+				IDocument.StartPrint("", 0);
+				IDocument.PrintOut(1, 0);
+				IDocument.EndPrint();
+				console.log("end of display label printing");
+			}
+		} catch (error) {
+			console.log(error);
 		}
+		IDocument.Close();
 	};
 
 	const printLabels = async () => {
 		try {
-			const newData = JSON.parse(JSON.stringify(productsArray)); // creates a deep copy of productsArray.
+			// creates a deep copy of productsArray.
+			const newData = JSON.parse(JSON.stringify(productsArray));
 
+			// Create a copy of productsArray for display printing
+			const dataforDisplayPrinting = JSON.parse(
+				JSON.stringify(productsArray)
+			);
+			// Initialize an array to store the converted data
 			const convertedData = [];
 
 			newData.forEach((item) => {
 				const descripcion = item.descripcion;
+				const precio = item.precio;
 
 				delete item.descripcion;
 				delete item.clave;
@@ -90,7 +102,7 @@ function Footer({ productsArray }) {
 							descripcion: `${descripcion} ${key}`,
 							existencia: value,
 							clave: `${brand}${model}${color}${key}`,
-							precio: item["PRECIO 1"],
+							precio: precio,
 						});
 					}
 				});
@@ -106,6 +118,7 @@ function Footer({ productsArray }) {
 			if (label === true) {
 				// Call the function to print the labels after setting the convertedData
 				await printLabelsData(convertedData);
+				await printDisplayLabel(dataforDisplayPrinting);
 			} else {
 				console.log("label not found");
 			}
