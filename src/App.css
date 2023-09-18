@@ -20,13 +20,14 @@
 	--aquamarine: #9fd3c7;
 	--midnight-blue: #385170;
 	--navy-blue: #142d4c;
+	--lila-cristal: #7883ff;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
-	min-width: 1000px;
-	max-width: 1200px;
+	min-width: 1334px;
+	max-width: 1000px;
 	margin: 0 auto;
 	align-items: center;
 	background-color: #414141;

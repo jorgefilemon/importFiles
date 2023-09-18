@@ -1,6 +1,7 @@
 import "./App.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // Pages
-import PrintLabels from "./pages/PrintLabels";
+import PrintLabelsPage from "./pages/PrintLabelsPage";
 import Import from "./pages/Import";
 import Home from "./pages/Home";
 import Root from "./pages/Root";
@@ -12,19 +13,23 @@ import {
 	RouterProvider,
 } from "react-router-dom";
 
+const queryClient = new QueryClient();
+
 function App() {
 	const router = createBrowserRouter(
 		createRoutesFromElements(
 			<Route path="/" element={<Root />}>
 				<Route index element={<Home />} />
-				<Route path="/PrintLabels" element={<PrintLabels />} />
+				<Route path="/PrintLabelsPage" element={<PrintLabelsPage />} />
 				<Route path="/Import" element={<Import />} />
 			</Route>
 		)
 	);
 	return (
 		<div>
-			<RouterProvider router={router} />
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
 		</div>
 	);
 }

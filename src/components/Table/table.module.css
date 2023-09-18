@@ -1,13 +1,13 @@
 .tableContainer {
-	min-height: 600px;
+	min-height: 700px;
 	display: flex;
 	justify-content: center; /* Horizontally center the content */
 	align-items: flex-start; /* Vertically center the content */
 }
 
-table {
+.tableContainer table {
 	border-collapse: collapse;
-	min-width: 1000px;
+	width: 1334px;
 }
 
 .tableContainer input {
@@ -19,51 +19,56 @@ table {
 	outline: none;
 }
 
-input:focus {
-	border: 2px solid cornflowerblue;
-	outline: 1px solid cornflowerblue;
+.tableContainer input:focus {
+	border: 2px solid #7883ff;
+	outline: 1px solid #7883ff;
 }
 
-td:nth-child(3),
-th:nth-child(3),
-td:nth-child(3n + 3),
-th:nth-child(3n + 3) {
+.tableContainer td:nth-child(3n + 4),
+.tableContainer th:nth-child(3n + 4) {
 	border-right: 1px solid rgb(145, 145, 145);
 }
-
-td {
+.tableContainer td {
 	border-left: 1px solid rgb(81, 81, 81);
 	border-bottom: 1px solid rgb(84, 84, 84);
 	height: 40px;
 }
 
-tr:last-child {
+.tableContainer tr:last-child {
 	border-bottom: 1px solid rgb(105, 105, 105);
 }
 
-td:nth-child(-n + 3),
-th:nth-child(-n + 3) {
+.tableContainer td:nth-child(-n + 4),
+.tableContainer th:nth-child(-n + 4) {
 	border-left: 1px solid rgb(140, 140, 140);
 	text-align: left;
-	padding: 0px 6px;
+	padding: 0px 4px;
 }
 
-th:last-child,
-td:last-child {
+.tableContainer th:last-child,
+.tableContainer td:last-child {
 	padding: 0px 6px;
 	text-align: right;
 }
 
-thead {
-	background-color: cornflowerblue;
+.tableContainer th:nth-child(2) {
+	min-width: 250px;
 }
 
-tr:focus-within {
+.tableContainer th:first-child {
+	min-width: 146px;
+}
+
+.tableContainer thead {
+	background-color: #7883ff;
+}
+
+.tableContainer tr:focus-within {
 	background-color: rgb(88, 88, 88);
 }
 
 /* Apply styles to the <input> elements inside the focused <tr> */
-tr:focus-within input[type="text"] {
+.tableContainer tr:focus-within input[type="text"] {
 	background-color: rgb(
 		74,
 		74,
@@ -75,6 +80,6 @@ tr:focus-within input[type="text"] {
 	background-color: cornflowerblue;
 }
 
-td ::selection {
+.tableContainer td ::selection {
 	background-color: cornflowerblue;
 }

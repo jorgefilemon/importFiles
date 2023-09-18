@@ -13,7 +13,7 @@ function Header({ setProductsArray }) {
 		const workbook = XLSX.read(data);
 		const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 		const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
+		// console.log("this is jsonData", jsonData);
 		const filteredData = jsonData.map((row) => {
 			const filteredRow = {};
 			Object.keys(row).forEach((key) => {
@@ -31,43 +31,48 @@ function Header({ setProductsArray }) {
 			);
 		});
 
+		console.log("filteredArray", filteredArray);
+
 		try {
 			const response = await axios.post(
 				"http://localhost:3001/import",
 				filteredArray
 			);
-			console.log(response.data); // Assuming the backend responds with some data
+			// console.log(response.data); // Assuming the backend responds with some data
 			//  setResponseData(response.data);
 			if (fileInputRef.current) {
 				fileInputRef.current.value = "";
 			}
 
-			const products = {};
+			if (response) {
+				const products = {};
 
-			response.data.forEach((item) => {
-				const parts = item.DESCRIPCION.split(" ");
-				let clave = item.CLAVE.split("");
-				clave = clave.slice(0, -2).join("");
+				filteredArray.forEach((item) => {
+					const parts = item.DESCRIPCION.split(" ");
+					let clave = item.CLAVE.split("");
+					clave = clave.slice(0, -2).join("");
 
-				console.log(clave);
+					console.log(clave);
 
-				const description = parts.slice(0, -1).join(" ");
-				console.log(description);
-				const size = parts[parts.length - 1];
-				console.log(size);
+					const description = parts.slice(0, -1).join(" ");
+					console.log(description);
+					const size = parts[parts.length - 1];
+					console.log(size);
 
-				if (!products[description]) {
-					products[description] = {
-						descripcion: description,
-						precio: item["PRECIO 1"],
-						clave: clave,
-						categoria: item["CATEGORIA"],
-					};
-				}
+					if (!products[description]) {
+						products[description] = {
+							descripcion: description,
+							precio: item["PRECIO 1"],
+							clave: clave,
+							marca: item["DEPARTAMENTO"],
+							categoria: item["CATEGORIA"],
+						};
+					}
 
-				products[description][size] = item["EXIST."];
-			});
-			setProductsArray(Object.values(products));
+					products[description][size] = item["EXIST."];
+				});
+				setProductsArray(Object.values(products));
+			}
 		} catch (error) {
 			console.error("Error sending data to the backend:", error);
 		}

@@ -145,6 +145,7 @@ function Table({ productsArray, handleInputChange }) {
 			<table>
 				<thead>
 					<tr>
+						<th>marca</th>
 						<th>descripcion</th>
 						<th>precio</th>
 						<th>categoria</th>
@@ -156,6 +157,7 @@ function Table({ productsArray, handleInputChange }) {
 				<tbody>
 					{productsArray.map((product, index) => (
 						<tr key={index}>
+							<td>{product.marca}</td>
 							<td>{product.descripcion}</td>
 							<td>${product.precio}</td>
 							<td>{product.categoria}</td>

@@ -1,0 +1,30 @@
+.modalBackground {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(126, 126, 126);
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.modalContainer {
+	background-color: rgb(217, 217, 217);
+	width: 760px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 100px;
+}
+
+.modalContainer .loading {
+	font-size: 38px;
+	clip-path: inset(0 1.48ch 0 0);
+	animation: l 500ms steps(4) infinite;
+}
+
+@keyframes l {
+	to {
+		clip-path: inset(0 -1ch 0 0);
+	}
+}

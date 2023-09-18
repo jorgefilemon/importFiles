@@ -11,7 +11,7 @@ function Nav() {
 				<Link to="/import">importar</Link>
 			</div>
 			<div>
-				<Link to="/PrintLabels">imprimir etiquetas</Link>
+				<Link to="/PrintLabelsPage">imprimir etiquetas</Link>
 			</div>
 		</nav>
 	);

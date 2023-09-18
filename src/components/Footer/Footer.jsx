@@ -49,7 +49,11 @@ function Footer({ productsArray }) {
 
 			for (const data of newData) {
 				const description = data.descripcion.split(" ");
-				const brand = description[0];
+				let brand = data.marca;
+				console.log("this is marca", brand);
+				if (brand === "LOLITA DAVAL") {
+					brand = "LOLITA"; // Change the brand value
+				}
 				const model = description[1];
 
 				let color = description[2];
@@ -57,7 +61,7 @@ function Footer({ productsArray }) {
 				const precio = data.precio;
 
 				precioLabel.Text = `$${precio}`;
-				marcaLabel.Text = brand.toUpperCase();
+				marcaLabel.Text = brand;
 				modeloLabel.Text = `${model} ${color}`;
 
 				IDocument.StartPrint("", 0);
@@ -80,7 +84,7 @@ function Footer({ productsArray }) {
 			const dataforDisplayPrinting = JSON.parse(
 				JSON.stringify(productsArray)
 			);
-			// Initialize an array to store the converted data
+			// Initialize an array to store the converted data in order to display model sizes in a row.
 			const convertedData = [];
 
 			newData.forEach((item) => {
