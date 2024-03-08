@@ -9,6 +9,10 @@ const Home = () => {
 
 	console.log("productsArray", productsArray);
 
+	// modal
+	const [modal, setModal] = useState(false);
+	const [message, setMessage] = useState(null);
+
 	// updates productsArray as values are changed in the input table.
 	const handleInputChange = (e, index, size) => {
 		const { value } = e.target;
@@ -34,7 +38,7 @@ const Home = () => {
 				handleInputChange={handleInputChange}
 			/>
 
-			<Footer productsArray={productsArray} />
+			<Footer productsArray={productsArray} setMessage={setMessage} />
 		</div>
 	);
 };

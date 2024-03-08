@@ -4,7 +4,7 @@
 	flex-direction: column;
 	padding: 10px;
 	height: 80px;
-	background-color: rgb(48, 48, 48);
+	background-color: var(--gray-Mist);
 	justify-content: center; /* Center content horizontally */
 	align-items: center; /* Center content vertically */
 }

@@ -1,9 +1,21 @@
 import { IDocument } from "./bpac";
 import style from "./footer.module.css";
 
-function Footer({ productsArray }) {
+function Footer({ productsArray, setMessage }) {
 	// prints in brother printer shoe labels.
+	// checks printer connection.
+
+	const connected = async () => {
+		const conn = await IDocument.GetPrinter();
+		if (conn) {
+			setMessage("imprimiendo");
+		} else {
+			setMessage("impresora no conectada");
+		}
+	};
+
 	const printLabelsData = async (convertedData) => {
+		// gets labels from label
 		const code = await IDocument.GetObject("barCode");
 		const brandLabel = await IDocument.GetObject("brand");
 		const modelLabel = await IDocument.GetObject("model");
@@ -36,9 +48,10 @@ function Footer({ productsArray }) {
 			}
 		}
 	};
-	// prints in brother printer display label.
+	// prints in brother printer display prices.
 	const printDisplayLabel = async (newData) => {
 		try {
+			// gets label file.
 			const displayLabel = await IDocument.Open(
 				"C:/Users/jorge/Desktop/displayLabel.lbx"
 			);

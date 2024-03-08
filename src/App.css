@@ -20,6 +20,7 @@
 	--aquamarine: #9fd3c7;
 	--midnight-blue: #385170;
 	--navy-blue: #142d4c;
+	--gray-Mist: #414141;
 	--lila-cristal: #7883ff;
 }
 
@@ -30,5 +31,5 @@
 	max-width: 1000px;
 	margin: 0 auto;
 	align-items: center;
-	background-color: #414141;
+	background-color: var(--gray-Mist);
 }

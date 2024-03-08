@@ -1,10 +1,11 @@
 import "./App.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // Pages
 import PrintLabelsPage from "./pages/PrintLabelsPage";
 import Import from "./pages/Import";
 import Home from "./pages/Home";
 import Root from "./pages/Root";
+import PrintDisplayLabelsPage from "./pages/PrintDisplayLabelsPage";
 // react router
 import {
 	createBrowserRouter,
@@ -13,7 +14,7 @@ import {
 	RouterProvider,
 } from "react-router-dom";
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 function App() {
 	const router = createBrowserRouter(
@@ -22,14 +23,18 @@ function App() {
 				<Route index element={<Home />} />
 				<Route path="/PrintLabelsPage" element={<PrintLabelsPage />} />
 				<Route path="/Import" element={<Import />} />
+				<Route
+					path="/PrintDisplayLabelsPage"
+					element={<PrintDisplayLabelsPage />}
+				/>
 			</Route>
 		)
 	);
 	return (
 		<div>
-			<QueryClientProvider client={queryClient}>
-				<RouterProvider router={router} />
-			</QueryClientProvider>
+			{/* <QueryClientProvider client={queryClient} */}
+			<RouterProvider router={router} />
+			{/* </QueryClientProvider> */}
 		</div>
 	);
 }

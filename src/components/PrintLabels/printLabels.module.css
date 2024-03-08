@@ -1,37 +1,50 @@
 .formContainer {
 	padding: 20px;
-}
 
-.formContainer input {
-	padding: 16px;
-	margin: 0px 6px;
-	width: 300px;
+	& input {
+		padding: 16px;
+		margin: 0px 6px;
+		width: 300px;
+
+		&:focus {
+			outline: 1px solid white;
+		}
+	}
 }
 
 /* T A B L E */
 
-.tableContainerPrint table {
-	border-collapse: collapse;
-	width: 1160px;
-}
+.tableContainerPrint {
+	& table {
+		border-collapse: collapse;
+		width: 1200px;
 
-.tableContainerPrint table button {
-	padding: 4px 12px;
-}
+		& button {
+			padding: 4px 12px;
+		}
 
-.tableContainerPrint td {
-	border: 1px solid gray;
-	padding: 6px;
-}
+		& td,
+		th {
+			border: 1px solid gray;
+			padding: 6px;
+		}
 
-.tableContainerPrint th {
-	border: 1px solid gray;
-	padding: 6px;
-	background-color: rgb(98, 98, 98);
+		& th {
+			background-color: rgb(98, 98, 98);
+		}
+	}
 }
 
 /* F O O T E R  */
 
-.footerContainer {
+.footerPrintLabels {
 	padding: 20px;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	background-color: #313131;
+}
+
+.footerPrintLabels button {
+	margin: 0px 10px;
 }

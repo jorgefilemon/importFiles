@@ -10,13 +10,33 @@ function PrintLabels() {
 	const [input, setInput] = useState("");
 
 	const [productList, addProduct] = useState([]);
+
+	const removeItem = (index) => {
+		const updatedproductList = [...productList];
+		updatedproductList.splice(index, 1);
+		addProduct(updatedproductList);
+	};
+	console.log(productList);
 	// gets product from the api call
 	const getArticulo = async (e) => {
 		e.preventDefault();
 
+		const words = input.trim().split(/\s+/);
+
+		let apiInput = input; // Initialize apiInput with the original input value
+
+		if (/^[a-zA-Z]+$/.test(words[0]) && /^[a-zA-Z]+$/.test(words[1])) {
+			// If both the first and second words consist of letters, join them
+			apiInput =
+				words.slice(0, 2).join("") + " " + words.slice(2).join(" ");
+		} else {
+			apiInput = input; // Use the original input value
+		}
+
+		console.log("apiInput", apiInput);
 		try {
 			const response = await axios.get(
-				`http://localhost:3001/product/${input}`
+				`http://localhost:3001/product/${apiInput}`
 			);
 
 			// get data with [0] only to get the object {}
@@ -81,7 +101,48 @@ function PrintLabels() {
 		}
 	};
 
-	const clearRow = () => {};
+	const printDisplayLabel = async () => {
+		try {
+			const displayLabel = await IDocument.Open(
+				"C:/Users/jorge/Desktop/displayLabel.lbx"
+			);
+			// get label labels name.
+			const precioLabel = await IDocument.GetObject("precioLabel");
+			const marcaLabel = await IDocument.GetObject("marcaLabel");
+			const modeloLabel = await IDocument.GetObject("modeloLabel");
+
+			const newData = JSON.parse(JSON.stringify(productList));
+			for (const data of newData) {
+				//
+				const description = data.descripcion.split(" ");
+				let brand = data.brand;
+				console.log("this is marca", brand);
+
+				if (brand === "LOLITA DAVAL") {
+					brand = "LOLITA"; // Change the brand value
+				} else if (brand === "SAAVE CAMINAR") {
+					brand = "SUAVE CAMINAR";
+				}
+				const model = description[1];
+
+				let color = description[2];
+				color = color.length > 11 ? color.substring(0, 11) : color;
+				const precio = (data.precio1 * 1.16).toFixed(0);
+
+				precioLabel.Text = `$${precio}`;
+				marcaLabel.Text = brand;
+				modeloLabel.Text = `${model} ${color}`;
+
+				IDocument.StartPrint("", 0);
+				IDocument.PrintOut(1, 0);
+				IDocument.EndPrint();
+				console.log(`${brand} ${model} ${color} ${precio} - printed!`);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		IDocument.Close();
+	};
 
 	return (
 		<div className="container">
@@ -113,15 +174,20 @@ function PrintLabels() {
 								<td>{product.descripcion}</td>
 								<td>{parseFloat(product.existencia)}</td>
 								<td>
-									<button onClick={clearRow}>X</button>
+									<button onClick={() => removeItem(index)}>
+										X
+									</button>
 								</td>
 							</tr>
 						))}
 					</tbody>
 				</table>
 			</div>
-			<div className={style.footerContainer}>
-				<button onClick={printLabelsData}>print Labels</button>
+			<div className={style.footerPrintLabels}>
+				<button onClick={printLabelsData}>imprimir etiquetas</button>
+				<button onClick={printDisplayLabel}>
+					imprimir precio aparador
+				</button>
 			</div>
 		</div>
 	);
