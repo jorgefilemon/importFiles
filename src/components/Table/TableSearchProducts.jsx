@@ -1,10 +1,9 @@
 import style from "./table.module.css";
 import { useEffect, useState } from "react";
 
-function Table({ productsArray, handleInputChange }) {
+function TableSearch({ searchProducts, handleInputChange }) {
 	const [activeInputIndex, setActiveInputIndex] = useState(-1);
 
-	//use keyboard arrow keys
 	useEffect(() => {
 		const handleArrowNavigation = (event) => {
 			const { key } = event;
@@ -133,11 +132,11 @@ function Table({ productsArray, handleInputChange }) {
 	};
 
 	useEffect(() => {
-		const newRowSums = productsArray.map((product) =>
+		const newRowSums = searchProducts.map((product) =>
 			calculateSumSizes(product)
 		);
 		setRowSums(newRowSums);
-	}, [productsArray]);
+	}, [searchProducts]);
 
 	const { headerCells, renderProductInputs } = generateHeaderAndInputs();
 
@@ -156,7 +155,7 @@ function Table({ productsArray, handleInputChange }) {
 					</tr>
 				</thead>
 				<tbody>
-					{productsArray.map((product, index) => (
+					{searchProducts.map((product, index) => (
 						<tr key={index}>
 							<td>{product.marca}</td>
 							<td>{product.descripcion}</td>
@@ -172,4 +171,4 @@ function Table({ productsArray, handleInputChange }) {
 	);
 }
 
-export default Table;
+export default TableSearch;

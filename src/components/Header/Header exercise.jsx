@@ -3,7 +3,7 @@ import style from "./header.module.css";
 import * as XLSX from "xlsx";
 import axios from "axios";
 
-function Header({ setProductsArray }) {
+function Header({ setProductsArray, setSearchProducts }) {
 	//
 	const fileInputRef = useRef(null);
 	// get productSizes = this is for getting the stock of the about to get imported product.
@@ -106,6 +106,53 @@ function Header({ setProductsArray }) {
 		});
 
 		console.log("filteredArray", filteredArray);
+		// get searched product
+		// try {
+		// 	const response = await axios.post(
+		// 		"http://localhost:3001/productSizes",
+		// 		filteredArray
+		// 	);
+
+		// 	const data = response.data;
+		// 	console.log(data, "this is the data from getProduct");
+
+		// 	if (response) {
+		// 		const products = {};
+
+		// 		data.forEach((item) => {
+		// 			const parts = item.descripcion.split(" "); // Adjusted to match the response data field
+		// 			let clave = item.clave.split(""); // Adjusted to match the response data field
+		// 			clave = clave.slice(0, -2).join("");
+
+		// 			console.log(clave);
+
+		// 			const description = parts.slice(0, -1).join(" "); // removes description size.
+		// 			console.log(description);
+		// 			const size = parts[parts.length - 1];
+		// 			console.log(size);
+
+		// 			if (!products[description]) {
+		// 				products[description] = {
+		// 					marca: parts[0],
+		// 					descripcion: description,
+		// 					precio: (item.precio1 * 1.16).toFixed(2), // Adjusted to match the response data field
+		// 					clave: clave,
+		// 				};
+		// 			}
+
+		// 			products[description][size] = Math.round(item.existencia); // Adjusted to match the response data field
+		// 		});
+
+		// 		setSearchProducts(Object.values(products));
+		// 	}
+
+		// 	if (fileInputRef.current) {
+		// 		fileInputRef.current.value = "";
+		// 	}
+		// } catch (error) {
+		// 	console.error("Error sending data to the backend:", error);
+		// }
+
 		// here it's when it imports it.
 		try {
 			const response = await axios.post(

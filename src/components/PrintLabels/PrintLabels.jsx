@@ -59,6 +59,7 @@ function PrintLabels() {
 	};
 
 	const printLabelsData = async () => {
+		//checks if label exists.
 		try {
 			const label = await IDocument.Open(
 				"C:/Users/jorge/Desktop/boxLabel.lbx"
@@ -88,7 +89,7 @@ function PrintLabels() {
 					brandLabel.Text = brand;
 					modelLabel.Text = model;
 					colorLabel.Text = color;
-					sizeLabel.Text = (size * 0.1).toFixed(1);
+					sizeLabel.Text = (size * 0.1).toFixed(1); // adds the decimal to shoe size, example 5.0 to the size
 
 					IDocument.StartPrint("", 0);
 					IDocument.PrintOut(1, 0);
