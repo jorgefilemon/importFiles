@@ -1,18 +1,10 @@
 import { IDocument } from "./bpac";
+import { useState } from "react";
 import style from "./footer.module.css";
 
-function Footer({ productsArray, setMessage }) {
+function Footer({ productsArray, setMessage, setModal }) {
 	// prints in brother printer shoe labels.
 	// checks printer connection.
-
-	const connected = async () => {
-		const conn = await IDocument.GetPrinter();
-		if (conn) {
-			setMessage("imprimiendo");
-		} else {
-			setMessage("impresora no conectada");
-		}
-	};
 
 	const printLabelsData = async (convertedData) => {
 		// gets labels from label
@@ -149,6 +141,7 @@ function Footer({ productsArray, setMessage }) {
 	return (
 		<footer className={style.footerContainer}>
 			<button onClick={printLabels}>imprimir</button>
+			{/* <button onClick={setModal(true)}>importar</button> */}
 		</footer>
 	);
 }

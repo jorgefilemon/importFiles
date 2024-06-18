@@ -1,10 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import style from "./header.module.css";
 import * as XLSX from "xlsx";
 import axios from "axios";
-
+import filterExcel from "./filterExcel";
+import compareArrays from "./compareArrays";
+import sumArrivalsAndExistingInventory from "./sumProduct";
+// header for working on
 function Header({ setProductsArray, setSearchProducts }) {
 	//
+
 	const fileInputRef = useRef(null);
 	// get productSizes = this is for getting the stock of the about to get imported product.
 	const getProduct = async (e) => {
@@ -104,99 +108,93 @@ function Header({ setProductsArray, setSearchProducts }) {
 				(value) => value !== undefined && value !== ""
 			);
 		});
-
 		console.log("filteredArray", filteredArray);
+
+		const filtered = filterExcel(filteredArray);
+
 		// get searched product
-		// try {
-		// 	const response = await axios.post(
-		// 		"http://localhost:3001/productSizes",
-		// 		filteredArray
-		// 	);
-
-		// 	const data = response.data;
-		// 	console.log(data, "this is the data from getProduct");
-
-		// 	if (response) {
-		// 		const products = {};
-
-		// 		data.forEach((item) => {
-		// 			const parts = item.descripcion.split(" "); // Adjusted to match the response data field
-		// 			let clave = item.clave.split(""); // Adjusted to match the response data field
-		// 			clave = clave.slice(0, -2).join("");
-
-		// 			console.log(clave);
-
-		// 			const description = parts.slice(0, -1).join(" "); // removes description size.
-		// 			console.log(description);
-		// 			const size = parts[parts.length - 1];
-		// 			console.log(size);
-
-		// 			if (!products[description]) {
-		// 				products[description] = {
-		// 					marca: parts[0],
-		// 					descripcion: description,
-		// 					precio: (item.precio1 * 1.16).toFixed(2), // Adjusted to match the response data field
-		// 					clave: clave,
-		// 				};
-		// 			}
-
-		// 			products[description][size] = Math.round(item.existencia); // Adjusted to match the response data field
-		// 		});
-
-		// 		setSearchProducts(Object.values(products));
-		// 	}
-
-		// 	if (fileInputRef.current) {
-		// 		fileInputRef.current.value = "";
-		// 	}
-		// } catch (error) {
-		// 	console.error("Error sending data to the backend:", error);
-		// }
-
-		// here it's when it imports it.
+		let serverData = [];
 		try {
 			const response = await axios.post(
-				"http://localhost:3001/import",
+				"http://localhost:3001/productSizes",
 				filteredArray
 			);
-			console.log(response.data); // Assuming the backend responds with some data
-			//  setResponseData(response.data);
-			if (fileInputRef.current) {
-				fileInputRef.current.value = "";
-			}
+
+			const data = response.data;
+			console.log(data, "this is the data from getProduct");
 
 			if (response) {
 				const products = {};
 
-				filteredArray.forEach((item) => {
-					const parts = item.DESCRIPCION.split(" ");
-					let clave = item.CLAVE.split("");
+				data.forEach((item) => {
+					const parts = item.descripcion.split(" "); // Adjusted to match the response data field
+					let clave = item.clave.split(""); // Adjusted to match the response data field
 					clave = clave.slice(0, -2).join("");
 
-					console.log(clave);
-
-					const description = parts.slice(0, -1).join(" ");
+					const description = parts.slice(0, -1).join(" "); // removes description size.
 					console.log(description);
 					const size = parts[parts.length - 1];
-					console.log(size);
 
 					if (!products[description]) {
 						products[description] = {
+							marca: parts[0],
 							descripcion: description,
-							precio: item["PRECIO 1"],
+							precio: (item.precio1 * 1.16).toFixed(2), // Adjusted to match the response data field
 							clave: clave,
-							marca: item["DEPARTAMENTO"],
-							categoria: item["CATEGORIA"],
 						};
 					}
 
-					products[description][size] = item["EXIST."];
+					products[description][size] = Math.round(item.existencia); // Adjusted to match the response data field
 				});
-				setProductsArray(Object.values(products));
+
+				serverData = Object.values(products);
+			}
+
+			if (fileInputRef.current) {
+				fileInputRef.current.value = "";
 			}
 		} catch (error) {
 			console.error("Error sending data to the backend:", error);
 		}
+
+		const arrivados = filtered.map((item) => ({
+			location: "arrivados",
+			...item,
+		}));
+
+		const bodega = serverData.map((item) => ({
+			location: "bodega",
+			...item,
+		}));
+
+		const combined = [...arrivados, ...bodega].sort((a, b) => {
+			if (a.descripcion < b.descripcion) return -1;
+			if (a.descripcion > b.descripcion) return 1;
+			return a.location < b.location ? -1 : 1;
+		});
+
+		setProductsArray(combined);
+
+		// here starts import process
+		const sumProducts = sumArrivalsAndExistingInventory(combined);
+
+		const arrayToImport = compareArrays(filteredArray, sumProducts);
+
+		// here it's when it imports it.
+		// try {
+		// 	const response = await axios.post(
+		// 		"http://localhost:3001/import",
+		// 		arrayToImport
+		// 	);
+		// 	console.log(response.data); // Assuming the backend responds with some data
+		// 	//  setResponseData(response.data);
+		// 	if (fileInputRef.current) {
+		// 		fileInputRef.current.value = "";
+		// 	}
+
+		// } catch (error) {
+		// 	console.error("Error sending data to the backend:", error);
+		// }
 	};
 
 	return (
@@ -207,14 +205,6 @@ function Header({ setProductsArray, setSearchProducts }) {
 					type="file"
 					ref={fileInputRef}
 					onChange={(e) => handleFile(e)}
-				/>
-			</label>
-			<label className={style.customFileUpload}>
-				get product
-				<input
-					type="file"
-					ref={fileInputRef}
-					onChange={(e) => getProduct(e)}
 				/>
 			</label>
 		</nav>

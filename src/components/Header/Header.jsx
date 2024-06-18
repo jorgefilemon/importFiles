@@ -162,14 +162,6 @@ function Header({ setProductsArray }) {
 					onChange={(e) => handleFile(e)}
 				/>
 			</label>
-			<label className={style.customFileUpload}>
-				get product
-				<input
-					type="file"
-					ref={fileInputRef}
-					onChange={(e) => getProduct(e)}
-				/>
-			</label>
 		</nav>
 	);
 }

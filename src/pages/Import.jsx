@@ -38,7 +38,11 @@ const Home = () => {
 				handleInputChange={handleInputChange}
 			/>
 
-			<Footer productsArray={productsArray} setMessage={setMessage} />
+			<Footer
+				productsArray={productsArray}
+				setMessage={setMessage}
+				setModal={setModal}
+			/>
 		</div>
 	);
 };
