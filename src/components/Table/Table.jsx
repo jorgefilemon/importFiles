@@ -81,10 +81,11 @@ function Table({ productsArray, handleInputChange }) {
 		));
 
 		const renderProductInputs = (product, index) => {
-			const generateInput = (size) => (
+			const generateInput = (size, isBodega) => (
 				<td key={size}>
 					<input
 						type="text"
+						className={isBodega ? style.bodegaFont : ""}
 						onFocus={(e) => e.target.select()}
 						defaultValue={
 							product.hasOwnProperty(size.toString())
@@ -103,7 +104,7 @@ function Table({ productsArray, handleInputChange }) {
 
 			const inputCells = headerValues.map((value) => {
 				const size = value;
-				return generateInput(size);
+				return generateInput(size, product.location === "bodega");
 			});
 
 			return inputCells;
@@ -146,7 +147,7 @@ function Table({ productsArray, handleInputChange }) {
 			<table>
 				<thead>
 					<tr>
-						<th>marca</th>
+						<th>Ubicacion</th>
 						<th>descripcion</th>
 						<th>precio</th>
 						<th>categoria</th>
@@ -157,13 +158,28 @@ function Table({ productsArray, handleInputChange }) {
 				</thead>
 				<tbody>
 					{productsArray.map((product, index) => (
-						<tr key={index}>
-							<td>{product.marca}</td>
+						<tr
+							key={index}
+							className={
+								product.location === "bodega"
+									? style.bodegaFont
+									: style.darkLight
+							}
+						>
+							<td>{product.location}</td>
 							<td>{product.descripcion}</td>
 							<td>${product.precio}</td>
 							<td>{product.categoria}</td>
 							{renderProductInputs(product, index)}
-							<td>{rowSums[index]}</td>
+							<td
+								className={
+									product.location === "bodega"
+										? style.bodegaFont
+										: ""
+								}
+							>
+								{rowSums[index]}
+							</td>
 						</tr>
 					))}
 				</tbody>

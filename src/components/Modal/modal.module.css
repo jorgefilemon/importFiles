@@ -1,30 +1,54 @@
 .modalBackground {
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background-color: rgb(126, 126, 126);
+	background-color: rgba(
+		126,
+		126,
+		126,
+		0.8
+	); /* Semi-transparent background */
 	display: flex;
 	align-items: center;
-	flex-direction: column;
+	justify-content: center; /* Center the modal */
+	/* z-index: 999; Ensure it appears on top */
 }
-
 .modalContainer {
-	background-color: rgb(217, 217, 217);
+	background-color: rgb(79, 79, 79);
 	width: 760px;
-	border-radius: 4px;
+	min-height: 500px;
+	border-radius: 6px;
 	display: flex;
 	align-items: center;
+	padding: 30px;
 	flex-direction: column;
-	margin-top: 100px;
 }
 
 .modalContainer .loading {
+	padding: 10px;
 	font-size: 38px;
-	clip-path: inset(0 1.48ch 0 0);
-	animation: l 500ms steps(4) infinite;
+	clip-path: inset(0 1.6ch 0 0);
+	animation: l 700ms steps(4) infinite;
 }
 
 @keyframes l {
 	to {
 		clip-path: inset(0 -1ch 0 0);
 	}
+}
+
+.modalContainer .bouncer {
+	padding: 10px;
+}
+
+.modalContainer .message {
+	padding: 10px;
+	font-size: 40px;
+}
+
+.modalContainer .btn {
+	padding: 20px;
+	font-size: 30px;
 }

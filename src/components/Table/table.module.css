@@ -26,7 +26,7 @@
 
 .tableContainer td:nth-child(3n + 4),
 .tableContainer th:nth-child(3n + 4) {
-	border-right: 1px solid rgb(145, 145, 145);
+	border-right: 1px solid rgb(173, 173, 173);
 }
 .tableContainer td {
 	border-left: 1px solid rgb(81, 81, 81);

@@ -2,7 +2,7 @@ const sumArrivalsAndExistingInventory = (combined) => {
 	const aggregatedResults = {};
 
 	combined.forEach((item) => {
-		const { descripcion, location, precio, ...sizes } = item;
+		const { descripcion, location, precio, clave, ...sizes } = item;
 
 		// Make DESCRIPCION equal to descripcion
 		const updatedItem = { ...item, DESCRIPCION: descripcion };
@@ -11,6 +11,7 @@ const sumArrivalsAndExistingInventory = (combined) => {
 		delete updatedItem.descripcion;
 		delete updatedItem.location;
 		delete updatedItem.precio;
+		delete updatedItem.clave;
 		delete updatedItem.categoria;
 		if (!aggregatedResults[descripcion]) {
 			aggregatedResults[descripcion] = { ...updatedItem }; // Initialize with the updated item itself

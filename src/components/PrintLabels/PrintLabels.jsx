@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../App.css";
 import style from "./printLabels.module.css";
 
-import { IDocument } from "../../components/Footer/bpac";
+import { IDocument } from "../../components/Modal/bpac";
 
 function PrintLabels() {
 	//
