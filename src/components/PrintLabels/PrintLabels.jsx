@@ -104,9 +104,8 @@ function PrintLabels() {
 
 	const printDisplayLabel = async () => {
 		try {
-			const displayLabel = await IDocument.Open(
-				"C:/Users/jorge/Desktop/displayLabel.lbx"
-			);
+			await IDocument.Open("C:/Users/jorge/Desktop/displayLabel.lbx");
+
 			// get label labels name.
 			const precioLabel = await IDocument.GetObject("precioLabel");
 			const marcaLabel = await IDocument.GetObject("marcaLabel");
@@ -124,6 +123,11 @@ function PrintLabels() {
 				} else if (brand === "SAAVE CAMINAR") {
 					brand = "SUAVE CAMINAR";
 				}
+
+				if (brand === "LOLITA CONFORT") {
+					brand = "LOLITA";
+				}
+
 				const model = description[1];
 
 				let color = description[2];
@@ -165,6 +169,7 @@ function PrintLabels() {
 							<th>clave</th>
 							<th>descripcion</th>
 							<th>existencia</th>
+							<th>precio</th>
 							<th>Borrar</th>
 						</tr>
 					</thead>
@@ -174,6 +179,7 @@ function PrintLabels() {
 								<td>{product.clave}</td>
 								<td>{product.descripcion}</td>
 								<td>{parseFloat(product.existencia)}</td>
+								<td>${(product.precio1 * 1.16).toFixed(0)}</td>
 								<td>
 									<button onClick={() => removeItem(index)}>
 										X

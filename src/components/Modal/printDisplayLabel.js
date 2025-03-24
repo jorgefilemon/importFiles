@@ -21,9 +21,11 @@ const printDisplayLabel = async (newData) => {
 				const description = data.descripcion.split(" ");
 				let brand = description[0].toUpperCase();
 				console.log("this is marca", brand);
-				if (brand === "LOLITA DAVAL") {
+				if (brand === "LOLITADAVAL") {
+					// it was "LOLITA DAVAL" before.
 					brand = "LOLITA"; // Change the brand value
 				}
+
 				const model = description[1];
 
 				let color = description[2];

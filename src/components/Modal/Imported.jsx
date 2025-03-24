@@ -58,12 +58,14 @@ const Imported = ({ setModal, productsArray }) => {
 				await printBoxesLabels(convertedData);
 				// productsArray is passed to only print one displayLabel per product model.
 				await printDisplayLabel(productsArray);
+				setMessage("Fin de impresion");
 			} else {
 				setMessage("Impresora no esta Prendida");
 			}
 			//
 		} catch (error) {
 			console.log(error);
+			setMessage("Hay un error en la impresion");
 		}
 
 		IDocument.Close();

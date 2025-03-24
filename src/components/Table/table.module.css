@@ -76,6 +76,7 @@
 .tableContainer tr:focus-within input[type="text"],
 .tableContainer tr:focus-within .bodegaFont {
 	background-color: rgb(94, 94, 94);
+	caret-color: #7883ff;
 }
 
 .selected-row {
