@@ -65,7 +65,7 @@ function PrintLabels() {
 				"C:/Users/jorge/Desktop/boxLabel.lbx"
 			);
 
-			console.log(label);
+			//console.log(label);
 
 			const newData = JSON.parse(JSON.stringify(productList));
 			console.log("newData", newData);
@@ -113,6 +113,9 @@ function PrintLabels() {
 
 			const newData = JSON.parse(JSON.stringify(productList));
 			for (const data of newData) {
+				// Skip iteration if descripcion is empty or not a string
+				if (!data.descripcion || data.descripcion.trim() === "")
+					continue;
 				//
 				const description = data.descripcion.split(" ");
 				let brand = data.brand;

@@ -161,19 +161,21 @@ function Table({ productsArray, handleInputChange }) {
 						<tr
 							key={index}
 							className={
-								product.location === "bodega"
+								product.location === "bodega" ||
+								product.location === "nuevo"
 									? style.bodegaFont
 									: style.darkLight
 							}
 						>
 							<td>{product.location}</td>
 							<td>{product.descripcion}</td>
-							<td>${product.precio}</td>
+							<td>{product.precio}</td>
 							<td>{product.categoria}</td>
 							{renderProductInputs(product, index)}
 							<td
 								className={
-									product.location === "bodega"
+									product.location === "bodega" ||
+									product.location === "nuevo"
 										? style.bodegaFont
 										: ""
 								}

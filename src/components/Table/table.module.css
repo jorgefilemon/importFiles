@@ -39,6 +39,11 @@
 	background-color: rgb(43, 43, 43);
 }
 
+.tableContainer .bodegaFont input {
+	background-color: transparent;
+	color: rgb(246, 128, 220); /* Optional: match text */
+}
+
 .tableContainer .darkLight {
 	background-color: rgb(24, 24, 24);
 }

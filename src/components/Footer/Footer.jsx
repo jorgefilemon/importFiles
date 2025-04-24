@@ -15,6 +15,8 @@ function Footer({ productsArray, originalArray, setModal }) {
 		} else {
 			setModal({ visible: true, message: "Importing" });
 		}
+
+		data = data.filter(product => product.location !== "nuevo");
 		// sums products in table if they are the same models in the rows.
 		const sumProducts = sumArrivalsAndExistingInventory(data);
 

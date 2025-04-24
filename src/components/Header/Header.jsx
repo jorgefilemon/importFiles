@@ -35,7 +35,7 @@ function Header({ setProductsArray, setOriginalArray }) {
 				(value) => value !== undefined && value !== ""
 			);
 		});
-		// console.log("filteredArray", filteredArray);
+		console.log("filteredArray", filteredArray);
 		setOriginalArray(filteredArray);
 
 		const filtered = filterExcel(filteredArray);
@@ -60,30 +60,40 @@ function Header({ setProductsArray, setOriginalArray }) {
 			console.error("Error sending data to the backend:", error);
 		}
 
-		// console.log("filtered", filtered);
 		const arrivados = filtered.map((item) => ({
 			location: "arrivados",
 			...item,
 		}));
 
-		// console.log("serverData", serverData);
 		const bodega = serverData.map((item) => ({
 			location: "bodega",
 			...item,
 		}));
 
-		const combined = [...arrivados, ...bodega].sort((a, b) => {
-			if (a.descripcion < b.descripcion) return -1;
-			if (a.descripcion > b.descripcion) return 1;
-			return a.location < b.location ? -1 : 1;
+		const combined = arrivados.flatMap((arrivado) => {
+			const matchIndex = bodega.findIndex(
+				(b) => b.descripcion === arrivado.descripcion
+			);
+
+			if (matchIndex !== -1) {
+				const match = bodega[matchIndex];
+				bodega.splice(matchIndex, 1); // avoid duplication
+				return [arrivado, match]; // arrivado + matching bodega
+			}
+
+			// No match: insert "new" version
+			const newItem = {
+				location: "nuevo",
+			};
+
+			return [arrivado, newItem]; // arrivado + "new"
 		});
 
-		setProductsArray(combined);
-		// console.log("setProductsArray in Header", combined);
-		// // here starts import process
-		// const sumProducts = sumArrivalsAndExistingInventory(combined);
+		// Add remaining unmatched bodega items at the end
+		const finalArray = [...combined, ...bodega];
 
-		// const arrayToImport = compareArrays(filteredArray, sumProducts);
+		// Now update the state
+		setProductsArray(finalArray);
 	};
 
 	return (

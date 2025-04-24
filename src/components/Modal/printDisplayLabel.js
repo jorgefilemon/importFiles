@@ -1,6 +1,8 @@
 import { IDocument } from "./bpac";
 
 const printDisplayLabel = async (newData) => {
+	console.log("newData at printDisplayLabel", newData);
+
 	try {
 		// gets label file.
 		const displayLabel = await IDocument.Open(
@@ -14,6 +16,7 @@ const printDisplayLabel = async (newData) => {
 			const modeloLabel = await IDocument.GetObject("modeloLabel");
 
 			const filteredData = newData
+				.filter((item) => item.location !== "nuevo")
 				.filter((item) => item.location !== "bodega")
 				.map(({ descripcion, precio }) => ({ descripcion, precio }));
 			console.log("filteredData at printDisplayLabel.js", filteredData);
