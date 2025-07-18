@@ -7,7 +7,7 @@
 
 .tableContainer table {
 	border-collapse: collapse;
-	width: 1334px;
+	width: 1340px;
 }
 
 .tableContainer input {
@@ -35,17 +35,26 @@
 }
 
 .tableContainer .bodegaFont {
-	color: rgb(246, 128, 220);
-	background-color: rgb(43, 43, 43);
+	color: rgb(248, 93, 215);
+	/* background-color: rgb(43, 43, 43); */
 }
 
 .tableContainer .bodegaFont input {
 	background-color: transparent;
-	color: rgb(246, 128, 220); /* Optional: match text */
+	color: rgb(248, 93, 215);
 }
 
-.tableContainer .darkLight {
+.tableContainer .darkLight input {
+	background-color: transparent;
+	color: white;
+}
+
+.tableContainer .darkLight td {
 	background-color: rgb(24, 24, 24);
+}
+
+.tableContainer .newProduct {
+	color: rgb(245, 138, 88); /* Optional: match text */
 }
 
 .tableContainer tr:last-child {
@@ -79,9 +88,14 @@
 
 .tableContainer tr:focus-within,
 .tableContainer tr:focus-within input[type="text"],
-.tableContainer tr:focus-within .bodegaFont {
+.tableContainer tr:focus-within .bodegaFont,
+.tableContainer tr:focus-within .darkLight {
 	background-color: rgb(94, 94, 94);
 	caret-color: #7883ff;
+}
+
+.tableContainer tr:focus-within td {
+	background-color: rgb(94, 94, 94);
 }
 
 .selected-row {

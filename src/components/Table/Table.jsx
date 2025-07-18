@@ -133,6 +133,12 @@ function Table({ productsArray, handleInputChange }) {
 		setRowSums(newRowSums);
 	};
 
+	const getRowClass = (loc) => {
+		if (loc === "bodega") return style.bodegaFont;
+		if (loc === "nuevo") return style.newProduct;
+		return style.darkLight;
+	};
+
 	useEffect(() => {
 		const newRowSums = productsArray.map((product) =>
 			calculateSumSizes(product)
@@ -160,26 +166,14 @@ function Table({ productsArray, handleInputChange }) {
 					{productsArray.map((product, index) => (
 						<tr
 							key={index}
-							className={
-								product.location === "bodega" ||
-								product.location === "nuevo"
-									? style.bodegaFont
-									: style.darkLight
-							}
+							className={getRowClass(product.location)}
 						>
 							<td>{product.location}</td>
 							<td>{product.descripcion}</td>
 							<td>{product.precio}</td>
 							<td>{product.categoria}</td>
 							{renderProductInputs(product, index)}
-							<td
-								className={
-									product.location === "bodega" ||
-									product.location === "nuevo"
-										? style.bodegaFont
-										: ""
-								}
-							>
+							<td className={getRowClass(product.location)}>
 								{rowSums[index]}
 							</td>
 						</tr>
