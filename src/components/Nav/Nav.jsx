@@ -17,6 +17,10 @@ function Nav() {
 			<NavLink to="/PrintLabelsPage" className="link">
 				Imprimir etiquetas
 			</NavLink>
+
+			<NavLink to="/stock" className="link">
+				Inventario
+			</NavLink>
 		</nav>
 	);
 }

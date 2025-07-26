@@ -6,6 +6,7 @@ import Import from "./pages/Import";
 import Home from "./pages/Home";
 import Root from "./pages/Root";
 import PrintDisplayLabelsPage from "./pages/PrintDisplayLabelsPage";
+import StockPage from "./pages/Stock";
 // react router
 import {
 	createBrowserRouter,
@@ -27,6 +28,7 @@ function App() {
 					path="/PrintDisplayLabelsPage"
 					element={<PrintDisplayLabelsPage />}
 				/>
+				<Route path="/stock" element={<StockPage />} />
 			</Route>
 		)
 	);
