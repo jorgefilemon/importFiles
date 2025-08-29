@@ -1,0 +1,107 @@
+.tableContainer {
+	min-height: 700px;
+	display: flex;
+	justify-content: center; /* Horizontally center the content */
+	align-items: flex-start; /* Vertically center the content */
+}
+
+.tableContainer table {
+	border-collapse: collapse;
+	width: 1340px;
+}
+
+.tableContainer input {
+	text-align: right;
+	max-width: 43px;
+	height: 40px;
+	padding: 2px;
+	border: 1px solid transparent;
+	outline: none;
+}
+
+.tableContainer input:focus {
+	border: 2px solid #7883ff;
+	outline: 1px solid #7883ff;
+}
+
+.tableContainer td:nth-child(3n + 4),
+.tableContainer th:nth-child(3n + 4) {
+	border-right: 1px solid rgb(173, 173, 173);
+}
+.tableContainer td {
+	border-left: 1px solid rgb(81, 81, 81);
+	border-bottom: 1px solid rgb(84, 84, 84);
+	height: 40px;
+}
+
+.tableContainer .bodegaFont {
+	color: rgb(248, 93, 215);
+	/* background-color: rgb(43, 43, 43); */
+}
+
+.tableContainer .bodegaFont input {
+	background-color: transparent;
+	color: rgb(248, 93, 215);
+}
+
+.tableContainer .darkLight input {
+	background-color: transparent;
+	color: white;
+}
+
+.tableContainer .darkLight td {
+	background-color: rgb(24, 24, 24);
+}
+
+.tableContainer .newProduct {
+	color: rgb(245, 138, 88); /* Optional: match text */
+}
+
+.tableContainer tr:last-child {
+	border-bottom: 1px solid rgb(105, 105, 105);
+}
+
+.tableContainer td:nth-child(-n + 4),
+.tableContainer th:nth-child(-n + 4) {
+	border-left: 1px solid rgb(140, 140, 140);
+	text-align: left;
+	padding: 0px 4px;
+}
+
+.tableContainer th:last-child,
+.tableContainer td:last-child {
+	padding: 0px 6px;
+	text-align: right;
+}
+
+.tableContainer th:nth-child(2) {
+	min-width: 250px;
+}
+
+.tableContainer th:first-child {
+	min-width: 146px;
+}
+
+.tableContainer thead {
+	background-color: #7883ff;
+}
+
+.tableContainer tr:focus-within,
+.tableContainer tr:focus-within input[type="text"],
+.tableContainer tr:focus-within .bodegaFont,
+.tableContainer tr:focus-within .darkLight {
+	background-color: rgb(94, 94, 94);
+	caret-color: #7883ff;
+}
+
+.tableContainer tr:focus-within td {
+	background-color: rgb(94, 94, 94);
+}
+
+.selected-row {
+	background-color: cornflowerblue;
+}
+
+.tableContainer td ::selection {
+	background-color: cornflowerblue;
+}
